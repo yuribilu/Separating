@@ -32,16 +32,16 @@ separeal(v), sepanonreal(v) separating (non-)totally real discriminants
 
 C. Scripts for the article
 
-cor63j(X), cor63j1728(X), cor63jprime(X) verifications for Corollary 6.3
-theorem71(X) verification for Theorem 7.1
-baddeltas(N) discriminants satisfying (9.4) or (9.5)
+cor53j(X), cor53j1728(X), cor53jprime(X) verifications for Corollary 5.3
+theorem61(X) verification for Theorem 6.1
+baddeltas(N) discriminants satisfying (8.4) or (8.5)
 simag(v) smallest absolute value of imaginary parts of (v[1]-v[i])/(v[j]-v[k])
 smallest_simag(v) smallest simag for a list of discriminants
 aredifsprop(v) proportional differences of polynomials
 iscrossratiorational(f) no rational cross-ratio of conjugates of an algebraic number generating a Galois extension of Q
 ratrootdifquot(f,g) can difference of roots of of f divided by that of g be rational?
-sec93(v) verification for Section 9.3 
-list93 list for Section 9.3
+sec83(v) verification for Section 8.3 
+list83 list for Section 8.3
 
 
 
@@ -322,7 +322,7 @@ return(w);
 smallest distance between distinct conjugate singular moduli up to disriminant X
 input: X\ge 15
 output: smallest distance 
-Remark: used to prove Proposition 7.2
+Remark: used to prove Proposition 6.2
 -----------------------------------------------------------------------*/
 
 mindistconj(X)=
@@ -429,7 +429,7 @@ v[m]=ellj((b+(-Delta)^(1/2)*I)/(2*a));
 smallest distance between two distinct singular moduli x,y of  disriminants bounded by X
 input: X\ge 4 
 output: smallest distance 
-Remark: used to prove Proposition 7.2
+Remark: used to prove Proposition 6.2
 -----------------------------------------------------------------------*/
 
 mindist(X)=
@@ -502,12 +502,12 @@ C. Scripts for the article
 
 
 /*----------------------------------------------------------
-verifications for Corollary 6.3
+verifications for Corollary 5.3
 input: X\ge 7
 output: 1 if (6.4),respectively (6.5), respectively (6.6) holds for all imaginary quadratic tau with discriminants \le X; 0 if not (together with the list of exceptions) 
 -----------------------------------------------------------*/
 
-cor63j(X)=
+cor53j(X)=
 {
 my(n,u,v,w,clno,Delta,d,rhs,tf);
 if(X<7, print ("X too small");return(0));
@@ -529,7 +529,7 @@ return(tf);
 
 
 
-cor63j1728(X)=
+cor53j1728(X)=
 {
 my(n,u,v,w,clno,Delta,d,rhs,tf);
 if(X<7, print ("X too small");return(0));
@@ -550,7 +550,7 @@ return(tf);
 }
 
 
-cor63jprime(X)=
+cor53jprime(X)=
 {
 my(n,u,v,w,clno,Delta,d,rhs,tf);
 if(X<7, print ("X too small");return(0));
@@ -572,23 +572,23 @@ return(tf);
 
 
 /*---------------------------------------------
-right-hand side of (7.1)
+right-hand side of (6.1)
 input u\ge v>0
 -------------------------------------------*/
 
-rhs71(u,v)=vecmin([800*v^(-4),20000*u^(-1)*v^(-3),700*u^(-3)])
+rhs61(u,v)=vecmin([800*v^(-4),20000*u^(-1)*v^(-3),700*u^(-3)])
 
 
 
 
 
 /*-------------------------------------------------------------
-verification for Theorem 7.1
+verification for Theorem 6.1
 input: X\ge 4, Y\ge 3
-output: 1 if (7,1) holds for all singular moduli x, y with discriminants \le X, \le Y respectively; 0 if not (together with the list of exceptions) 
+output: 1 if (6,1) holds for all singular moduli x, y with discriminants \le X, \le Y respectively; 0 if not (together with the list of exceptions) 
 --------------------------------------------------------------------*/
 
-theorem71(X,Y)=
+theorem61(X,Y)=
 {
 my(u,v,m,n,d,rhs,tf,clno);
 if(X<4, print ("X too small");return(0));
@@ -600,13 +600,13 @@ n=length(v);
 tf=1;
 for(i=2,m,
 for(j=1,min(n,i-1),
-rhs=rhs71(u[i],v[j]);
+rhs=rhs61(u[i],v[j]);
 d=distance(sigmods(u[i]),sigmods(v[j]));
 if(d<rhs,
 print("bad discriminants " u[i] "," v[j]);
 tf=0;);););
 for(i=1,min(m,n),
-rhs=rhs71(u[i],u[i]);
+rhs=rhs61(u[i],u[i]);
 clno=qfbclassno(u[i]);
 if(clno==1,next;);
 d=distance_in(sigmods(u[i]));
@@ -618,10 +618,10 @@ return(tf);
 
 
 /*-----------------------------------------------
-Discriminants satisfying (9.8) or (9.9)
+Discriminants satisfying (8.4) or (8.5)
 input N\ge 20
 output
-all discriminants satisfying (9.8) or (9.9) not exceeding 2*N in absolute value
+all discriminants satisfying (8.4) or (8.5) not exceeding 2*N in absolute value
 Remark: since we know that h(Delta)>6 when |Delta| > 3763, it is enough to run with N=1882
 ----------------------------------------------------*/
 
@@ -851,13 +851,13 @@ return(1);
 
 
 /*----------------------------------------------------------- 
-verification for Section 9.3 
+verification for Section 8.3 
 input: list of pairs of discriminants 
 output: 1 if OK, 0 if not
 ---------------------------------------------------------------*/ 
 
 
-sec93(v)=
+sec83(v)=
 {
 my(n,u,Deltax,Deltay,f,g);
 
@@ -889,7 +889,7 @@ return(1);
 
 
 /*---------------------------------------------------
-list for Section 9.3
+list for Section 8.3
 ---------------------------------------------------*/
 
 list93= [[-96,-192],   [-96, -288],   [-120, -160] ,   [-120, - 280], [-120, -760],   [-160, -280],   [-160, - 760],    [-180, -240],   [-192,-288],   [-195, -520],   [-195, - 715],   [-280, -760],  [-340, - 595],   [-480, - 960],    [-520, - 715]]
