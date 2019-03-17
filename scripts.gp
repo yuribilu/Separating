@@ -16,6 +16,7 @@ minabs(v) smallest  absolute value in a vector
 distance_in(v) minimal distance between entries of a vector
 distance(v,w) minimal distance between entries of two vectors
 areprop(f,g) are two polynomials proportional
+tabulating(f,a,s,N) list of N values of the function f starting from a with step s
 
 B. Scripts on j,  dicriminants and singular moduli
 
