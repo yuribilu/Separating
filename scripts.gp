@@ -2,7 +2,7 @@
 
 
 
-PARI scripts used for the article 
+PARI macros and scripts used for the article 
 
 "Separating singular moduli and the primitive element problem"
 
@@ -30,8 +30,11 @@ sigmodsupto(X) list of the singular moduli up to disriminant X
 mindist(X) smallest distance between two distinct singular moduli up to disriminant X
 separeal(v), sepanonreal(v) separating (non-)totally real discriminants
 
-C. Scripts for the article
+C. Macros and scripts for the article
 
+func_f(y), func_g(y), funcgprime(y) functions f and g from Section 3.1
+Azero, Aone Absolute values of the constants A_0 and A_1 (Section 3.2)
+kappazero(R), kappaone(R), lambdazero(R), lambdaone(R) functions kappa_0, kappa_1, lambda_0, lambda_1 (Section 3.2)
 cor53j(X), cor53j1728(X), cor53jprime(X) verifications for Corollary 5.3
 theorem61(X) verification for Theorem 6.1
 baddeltas(N) discriminants satisfying (8.4) or (8.5)
@@ -132,6 +135,14 @@ h=pollead(f)*g-pollead(g)*f;
 if(h==0, return(1););
 return(0); 
 }
+
+
+/*--------------------------------------------
+List of N values of the function f starting from a with step s
+----------------------------------------------*/
+
+tabulating (f,a,s,N)=
+vector(N,i,f(a+(i-1)*s))
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -495,9 +506,45 @@ return(u);
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-C. Scripts for the article
+C. Macros and cripts for the article
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+/*-------------------------------------------
+functions f and g from Section 3.1
+-----------------------------------------------*/
+
+func_f(y)=ellj(I*y)
+
+func_g(y)=4*Pi*exp(2*Pi*y)-I*jprime(I*y)
+
+func_gprime(y)=8*Pi^2*exp(2*Pi*y)+jsecond(I*y)
+
+/*----------------------------------------
+Absolute values of the constants A_0 and A_1 (Section 3.2)
+----------------------------------------*/
+
+Azero= 27*gamma(1/3)^18/Pi^9
+
+Aone= 81*gamma(1/4)^8/Pi^4
+
+
+/*------------------------------------------
+functions kappa_0, kappa_1, lambda_0, lambda_1 (Section 3.2)
+
+Input R \in (0,sqrt(3)/2) for kappazero, lambdazero
+R \in (0,1) for kappaone, lambdaone
+-------------------------------------------*/
+kappazero(R)= Azero/R + func_f(sqrt(3)/2-R)/R^4
+
+lambdazero(R)= 3*Azero/R + max(func_g(sqrt(3)/2-R), func_g(sqrt(3)/2+R))/R^3
+
+kappaone(R)= Aone/R + func_f(1-R)/R^3
+
+lambdaone(R)= 2*Aone/R + max(func_g(1-R), func_g(1+R))/R^2
+
+
+
 
 
 
